@@ -182,7 +182,7 @@ def process_ktp_image_core(image_path):
             bottom_right = tuple(map(int, bbox[2]))
             cv2.rectangle(img_with_boxes, top_left, bottom_right, box_color, line_thickness)
         timestamp = int(time.time() * 1000000)
-        debug_image_path = os.path.join("temp_uploads", "debug_ocr_" + os.path.basename(image_path))
+        debug_image_path = os.path.join("temp_uploads", "debug_ocr_" + str(timestamp) + "_" + os.path.basename(image_path))
         cv2.imwrite(debug_image_path, img_with_boxes)
 
 
