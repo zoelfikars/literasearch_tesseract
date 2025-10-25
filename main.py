@@ -67,8 +67,11 @@ def four_point_transform(image, pts):
     M = cv2.getPerspectiveTransform(rect, dst)
     warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
     return warped
-
-reader = easyocr.Reader(['en', 'id'])
+MODELS_PATH = '/var/www/literasearch_tesseract/easyocr_models'
+reader = easyocr.Reader(
+    ['en', 'id'], 
+    gpu=False,
+    model_storage_directory=MODELS_PATH)
 
 @app.post("/process-ktp/")
 async def process_ktp(
