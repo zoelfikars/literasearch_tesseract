@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from typing import Optional
 from dotenv import load_dotenv
 import os
+import time
 
 load_dotenv()
 
@@ -177,6 +178,7 @@ def process_ktp_image_core(image_path):
             top_left = tuple(map(int, bbox[0]))
             bottom_right = tuple(map(int, bbox[2]))
             cv2.rectangle(img_with_boxes, top_left, bottom_right, box_color, line_thickness)
+        timestamp = int(time.time() * 1000000)
         debug_image_path = os.path.join("temp_uploads", "debug_ocr_" + os.path.basename(image_path))
         cv2.imwrite(debug_image_path, img_with_boxes)
 
