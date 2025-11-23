@@ -14,6 +14,7 @@ from typing import Optional
 from dotenv import load_dotenv
 import os
 import time
+from pathlib import Path
 
 load_dotenv()
 
@@ -67,11 +68,11 @@ def four_point_transform(image, pts):
     M = cv2.getPerspectiveTransform(rect, dst)
     warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
     return warped
-MODELS_PATH = '/var/www/literasearch/ocr/easyocr_models'
+MODEL_PATH = Path(os.path.abspath(os.path.dirname(__file__))).joinpath('models/easyocr')
 reader = easyocr.Reader(
     ['en', 'id'], 
     gpu=False,
-    model_storage_directory=MODELS_PATH)
+    model_storage_directory=str(MODEL_PATH))
 
 @app.post("/process-ktp/")
 async def process_ktp(
