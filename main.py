@@ -67,7 +67,7 @@ def four_point_transform(image, pts):
     M = cv2.getPerspectiveTransform(rect, dst)
     warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
     return warped
-MODELS_PATH = '/var/www/literasearch_tesseract/easyocr_models'
+MODELS_PATH = '/var/www/literasearch/ocr/easyocr_models'
 reader = easyocr.Reader(
     ['en', 'id'], 
     gpu=False,
